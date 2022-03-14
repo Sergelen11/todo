@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../firebase";
-export const TaskAdd = () => {
+export const TaskAdd = ({editThis}) => {
     const [ title, setTitle ] = useState('');
-
+    
     const onChange = (e) => {
         setTitle(e.target.value);
     }
     
     const onClick = () => {
         db.collection('todos').add({
-            title: title
+            title: title,
+            checked: false,
         })
         setTitle('')
     }
-
     return (
         <div className="container">
             <input type="text" onChange={ onChange } value={ title } /> 
